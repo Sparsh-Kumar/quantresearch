@@ -1,0 +1,4 @@
+ccxt==4.4.78
+pymongo==4.12.1
+python-dotenv==1.1.0
+pytz==2024.2
