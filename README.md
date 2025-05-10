@@ -38,4 +38,10 @@ source ./venv/bin/activate
 pip install -r requirements.txt
 ```
 
+---
+## 🚧 Work in Progress
+
+> **⚠️ This project is a Work in Progress (WIP). Features and structure are subject to change.**
+---
+
 
