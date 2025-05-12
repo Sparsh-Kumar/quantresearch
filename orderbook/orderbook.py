@@ -18,7 +18,14 @@ asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 class BinanceWebSocketClient:
 
-  def __init__(self, url = '', ticker='btcusdt', orderBook = None, checkLatency = False, checkLatencyRecords = 500, session = None):
+  def __init__(
+    self, url = '',
+    ticker='btcusdt',
+    orderBook = None,
+    checkLatency = False,
+    checkLatencyRecords = 500,
+    session = None
+  ):
     self.ws = None
     self.ticker = ticker
     self.url = f'{url}/{ticker}@depth@100ms'
@@ -98,26 +105,6 @@ class OrderBook:
       self.bids = orderBookData['b']
       self.asks = orderBookData['a']
       self.display_order_book()
-    """
-    if (not self.depthData):
-      self.depthData = self.get_orderbook_depth()
-    if ('u' not in orderBookData or 'U' not in orderBookData):
-      return
-    u = orderBookData['u']
-    U = orderBookData['U']
-    lastUpdateId = self.depthData['lastUpdateId']
-    shouldDropEvent = (u < lastUpdateId)
-    if (shouldDropEvent):
-      return
-    firstProcessedEvent = (U <= lastUpdateId) and (u >= lastUpdateId)
-    if (firstProcessedEvent):
-      self.bids = orderBookData['b']
-      self.asks = orderBookData['a']
-    else:
-      self.bids = orderBookData['b']
-      self.asks = orderBookData['a']
-    self.display_order_book()
-    """
 
   def display_order_book_spread(self):
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -172,16 +159,6 @@ class OrderBook:
     if depthResponse.status_code == 200:
       depthData = depthResponse.json()
     return depthData
-
-
-class BinanceWebSocketService:
-
-  def __init__(self, client: BinanceWebSocketClient):
-    self.client = client
-
-  def start_stream(self):
-    self.client.onConnect()
-
 
 async def main():
   parser = argparse.ArgumentParser(
